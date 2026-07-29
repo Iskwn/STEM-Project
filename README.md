@@ -1,2 +1,2 @@
 # STEM-Project
-Ripoff PhET sims
+Temu PhET Sims (though not entirely identical)
