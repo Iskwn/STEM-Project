@@ -1,0 +1,60 @@
+    QMainWindow {
+    background-color: #15171c;
+    }
+
+    QLabel {
+    color: #e8eaf0;
+    }
+
+    QLabel#title {
+    font-size: 42px;
+    font-weight: 700;
+    }
+
+    QLabel#subtitle {
+    color: #a9afbb;
+    font-size: 17px;
+    }
+
+    QFrame#projectCard {
+    background-color: #20242c;
+    border: 1px solid #343a46;
+    border-radius: 14px;
+    }
+
+    QFrame#projectCard:hover {
+    border: 1px solid #5d78c7;
+    }
+
+    QLabel#cardTitle {
+    font-size: 24px;
+    font-weight: 600;
+    }
+
+    QLabel#cardDescription {
+    color: #aeb5c2;
+    font-size: 14px;
+    }
+
+    QPushButton {
+    background-color: #3d5fa8;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 11px 16px;
+    }
+
+    QPushButton:hover {
+    background-color: #4b70bf;
+    }
+
+    QPushButton:pressed {
+    background-color: #304c87;
+    }
+
+    QPushButton:disabled {
+    background-color: #343842;
+    color: #777d89;
+    }

@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import (
     QFrame,
@@ -88,7 +90,7 @@ class MainWindow(QMainWindow):
         # Pushes the cards toward the top instead of stretching them across the window
         main_layout.addStretch()
         
-        # Temp stylesheet
+        self.theme = "light"
         self.apply_styles()
     
     def create_project_card(
@@ -104,7 +106,7 @@ class MainWindow(QMainWindow):
         
         card = QFrame()
         card.setObjectName("projectCard")
-
+        card.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
         # Card layout
         card_layout = QVBoxLayout(card)
         card_layout.setContentsMargins(25, 25, 25, 25)
@@ -150,73 +152,14 @@ class MainWindow(QMainWindow):
         '''
         print("Opening calculator...")
     
-    def apply_styles(self):
-        '''
-        Temp application styling
-        Will later be moved into app/ui/themes/dark.qss
-        '''
-        self.setStyleSheet(
-            """
-            QMainWindow {
-                background-color: #15171c;
-            }
-            
-            QLabel {
-                color: #e8eaf0;
-            }
-            
-            QLabel#title {
-                font-size: 42px;
-                font-weight: 700;
-            }
-            
-            QLabel#subtitle {
-                color: #a9afbb;
-                font-size: 17px;
-            }
-            
-            QFrame#projectCard {
-                background-color: #20242c;
-                border: 1px solid #343a46;
-                border-radius: 14px;
-            }
-            
-            QFrame#projectCard:hover {
-                border: 1px solid #5d78c7;
-            }
-            
-            QLabel#cardTitle {
-                font-size: 24px;
-                font-weight: 600;
-            }
-            
-            QLabel#cardDescription {
-                color: #aeb5c2;
-                font-size: 14px;
-            }
-            
-            QPushButton {
-                background-color: #3d5fa8;
-                border: none;
-                border-radius: 8px;
-                color: white;
-                font-size: 14px;
-                font-weight: 600;
-                padding: 11px 16px;
-            }
-            
-            QPushButton:hover {
-                background-color: #4b70bf;
-            }
-            
-            QPushButton:pressed {
-                background-color: #304c87;
-            }
-            
-            QPushButton:disabled {
-                background-color: #343842;
-                color: #777d89;
-            }
-            """
-        )
+    def apply_styles(self, theme: str | None = None):
+        selected_theme = self.theme if theme is None else theme
+        if not selected_theme or Path(selected_theme).name != selected_theme:
+            raise ValueError("Theme must be a filename without a path.")
+
+        themes_dir = Path(__file__).resolve().parent.parent / "ui" / "themes"
+        stylesheet_path = themes_dir / f"{selected_theme}.qss"
+        stylesheet = stylesheet_path.read_text(encoding="utf-8")
+        self.setStyleSheet(stylesheet)
+        self.theme = selected_theme
         
